@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AJ Traders – Premium Printing Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f5f0e8;
+      --gold: #c8953a;
+      --gold-light: #e8b865;
+      --white: #ffffff;
+      --gray: #6b6b6b;
+      --light-gray: #ebebeb;
+      --section-pad: clamp(60px, 8vw, 120px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(13,13,13,0.96);
+      backdrop-filter: blur(12px);
+      padding: 0 6vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+      border-bottom: 1px solid rgba(200,149,58,0.25);
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--ink) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 3px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--gold-light); color: var(--ink) !important; }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); transition: 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; width: 100%;
+      background: rgba(13,13,13,0.98); padding: 2rem 6vw;
+      flex-direction: column; gap: 1.4rem; z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      font-size: 1.1rem; font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase; padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 120px 6vw 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(200,149,58,0.12) 0%, transparent 65%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(200,149,58,0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(200,149,58,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    }
+    .hero-content { position: relative; max-width: 700px; }
+    .hero-eyebrow {
+      font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 40px; height: 1px; background: var(--gold);
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      line-height: 0.92;
+      color: var(--white);
+      letter-spacing: 2px;
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      color: rgba(255,255,255,0.6);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--ink);
+      padding: 0.9rem 2.2rem; border-radius: 3px;
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3); color: var(--white);
+      padding: 0.9rem 2.2rem; border-radius: 3px;
+      font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-stat-row {
+      position: absolute; bottom: 50px; right: 6vw;
+      display: flex; gap: 3rem;
+    }
+    .hero-stat { text-align: right; }
+    .hero-stat .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; color: var(--gold); line-height: 1;
+    }
+    .hero-stat .label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.45);
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: var(--gold);
+      padding: 0.85rem 0; overflow: hidden;
+      display: flex;
+    }
+    .marquee-track {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem; letter-spacing: 3px;
+      color: var(--ink); padding: 0 2.5rem;
+      display: flex; align-items: center; gap: 2.5rem;
+    }
+    .marquee-item::after { content: '✦'; font-size: 0.7rem; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ── SECTION SHARED ── */
+    section { padding: var(--section-pad) 6vw; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1; margin-bottom: 1.2rem;
+    }
+    .section-sub {
+      color: var(--gray); font-size: 1rem; line-height: 1.7;
+      max-width: 560px; font-weight: 300;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--white); }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 1.5rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--light-gray);
+      border: 1.5px solid var(--light-gray);
+    }
+    .service-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      cursor: pointer;
+      transition: background 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card:hover { background: var(--ink); }
+    .service-card:hover .sc-icon { color: var(--gold); }
+    .service-card:hover .sc-title { color: var(--white); }
+    .service-card:hover .sc-desc { color: rgba(255,255,255,0.5); }
+    .service-card:hover .sc-arrow { color: var(--gold); }
+    .sc-icon { font-size: 2.2rem; margin-bottom: 1.5rem; transition: color 0.25s; }
+    .sc-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 1px;
+      margin-bottom: 0.8rem; transition: color 0.25s;
+    }
+    .sc-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; transition: color 0.25s; font-weight: 300; }
+    .sc-arrow {
+      position: absolute; bottom: 1.5rem; right: 1.8rem;
+      font-size: 1.2rem; color: var(--light-gray); transition: color 0.25s;
+    }
+
+    /* ── WHY US ── */
+    .why { background: var(--ink); color: var(--white); }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; }
+    .why-features { display: grid; gap: 2rem; margin-top: 2.5rem; }
+    .why-feature { display: flex; gap: 1.2rem; }
+    .wf-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem; color: var(--gold); line-height: 1;
+      min-width: 2.5rem;
+    }
+    .wf-title { font-weight: 600; margin-bottom: 0.4rem; font-size: 1rem; }
+    .wf-text { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; font-weight: 300; }
+    .why-visual {
+      position: relative; aspect-ratio: 4/5;
+      background: rgba(200,149,58,0.08);
+      border: 1px solid rgba(200,149,58,0.2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.5rem;
+    }
+    .why-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem; color: rgba(200,149,58,0.15);
+      line-height: 1;
+    }
+    .why-tag {
+      font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+      border: 1px solid rgba(200,149,58,0.3);
+      padding: 0.5rem 1.2rem;
+    }
+
+    /* ── PROCESS ── */
+    .process { background: var(--paper); }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 3.5rem; background: #ddd; border: 2px solid #ddd; }
+    .step {
+      background: var(--paper); padding: 2.5rem 1.8rem;
+      position: relative;
+    }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem; color: rgba(200,149,58,0.18);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .step-title { font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem; }
+    .step-text { font-size: 0.85rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
+
+    /* ── PRODUCTS ── */
+    .products { background: var(--white); }
+    .products-header { margin-bottom: 3rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+    .product-card {
+      background: var(--paper);
+      padding: 2rem 1.5rem;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .product-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .pc-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .pc-name { font-weight: 700; margin-bottom: 0.4rem; }
+    .pc-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--ink); color: var(--white); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+    .tcard {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .tcard:hover { border-color: rgba(200,149,58,0.4); }
+    .tcard-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; }
+    .tcard-text { font-size: 0.92rem; color: rgba(255,255,255,0.65); line-height: 1.75; font-weight: 300; margin-bottom: 1.5rem; }
+    .tcard-author { display: flex; align-items: center; gap: 0.8rem; }
+    .tcard-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; color: var(--ink); font-size: 1.1rem;
+    }
+    .tcard-name { font-weight: 600; font-size: 0.9rem; }
+    .tcard-role { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--gold);
+      padding: 80px 6vw;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .cta-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--ink); line-height: 1;
+    }
+    .btn-dark {
+      background: var(--ink); color: var(--white);
+      padding: 1rem 2.5rem; border-radius: 3px;
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .btn-dark:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--paper); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6vw; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+    .ci-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .ci-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: var(--ink); border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .ci-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gray); margin-bottom: 0.3rem; }
+    .ci-value { font-weight: 600; }
+    .contact-form { background: var(--white); padding: 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gray); }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1.5px solid var(--light-gray);
+      padding: 0.75rem 1rem; font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem; background: var(--paper);
+      color: var(--ink); outline: none; border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      background: var(--ink); color: var(--white); border: none;
+      padding: 1rem 2.5rem; font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 1.5px;
+      text-transform: uppercase; cursor: pointer; border-radius: 3px;
+      transition: background 0.2s; width: 100%;
+    }
+    .form-submit:hover { background: var(--gold); color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 6vw;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; color: var(--white); letter-spacing: 3px;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy { font-size: 0.82rem; }
+    .footer-links { display: flex; gap: 1.8rem; }
+    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .why-inner { grid-template-columns: 1fr; }
+      .why-visual { display: none; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .hero-stat-row { position: static; margin-top: 3rem; justify-content: flex-start; }
+    }
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 4.5rem; }
+    }
+    @media (max-width: 500px) {
+      .hero-stat-row { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">AJ <span>Traders</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#process" onclick="toggleMenu()">How It Works</a>
+  <a href="#contact" onclick="toggleMenu()">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium Printing Services</p>
+    <h1>Print.<br><em>Bold.</em><br>Deliver.</h1>
+    <p>From business cards to large-format banners — AJ Traders brings your brand to life with precision printing, fast turnarounds, and uncompromising quality.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <div class="num">500+</div>
+      <div class="label">Happy Clients</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">10+</div>
+      <div class="label">Years Experience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">48h</div>
+      <div class="label">Fast Turnaround</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item">Business Cards</div>
+    <div class="marquee-item">Banners & Signage</div>
+    <div class="marquee-item">Brochures & Flyers</div>
+    <div class="marquee-item">Flex Printing</div>
+    <div class="marquee-item">Stickers & Labels</div>
+    <div class="marquee-item">Packaging</div>
+    <div class="marquee-item">Corporate Stationery</div>
+    <div class="marquee-item">Vehicle Wraps</div>
+    <div class="marquee-item">Exhibition Displays</div>
+    <div class="marquee-item">Business Cards</div>
+    <div class="marquee-item">Banners & Signage</div>
+    <div class="marquee-item">Brochures & Flyers</div>
+    <div class="marquee-item">Flex Printing</div>
+    <div class="marquee-item">Stickers & Labels</div>
+    <div class="marquee-item">Packaging</div>
+    <div class="marquee-item">Corporate Stationery</div>
+    <div class="marquee-item">Vehicle Wraps</div>
+    <div class="marquee-item">Exhibition Displays</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">Professional printing solutions for businesses of all sizes — delivered with care and craftsmanship.</p>
+    </div>
+    <a href="#contact" class="btn-primary">Get a Quote →</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="sc-icon">🖨️</div>
+      <div class="sc-title">Digital Printing</div>
+      <div class="sc-desc">High-resolution digital prints for short runs, personalised materials, and quick-turnaround projects with vibrant color accuracy.</div>
+      <div class="sc-arrow">→</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">📐</div>
+      <div class="sc-title">Large Format</div>
+      <div class="sc-desc">Eye-catching banners, posters, building wraps, and outdoor signage printed at any scale with weather-resistant inks.</div>
+      <div class="sc-arrow">→</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">🖼️</div>
+      <div class="sc-title">Flex & Vinyl</div>
+      <div class="sc-desc">Durable flex banners, vinyl stickers, and cut-vinyl lettering for storefronts, events, and long-term outdoor applications.</div>
+      <div class="sc-arrow">→</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">📦</div>
+      <div class="sc-title">Packaging Print</div>
+      <div class="sc-desc">Custom boxes, bags, and product packaging that make your brand stand out on the shelf and in customers' hands.</div>
+      <div class="sc-arrow">→</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">🪪</div>
+      <div class="sc-title">Corporate Stationery</div>
+      <div class="sc-desc">Business cards, letterheads, envelopes, and notepads that present your company with a consistent, professional identity.</div>
+      <div class="sc-arrow">→</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">🚗</div>
+      <div class="sc-title">Vehicle Branding</div>
+      <div class="sc-desc">Full and partial vehicle wraps that turn your fleet into moving billboards — professionally installed, strikingly designed.</div>
+      <div class="sc-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-inner">
+    <div>
+      <p class="section-label" style="color:var(--gold)">Why AJ Traders</p>
+      <h2 class="section-title" style="color:var(--white)">Quality You Can<br>Count On</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5)">We combine modern printing technology with experienced craftsmanship to deliver results that exceed expectations — every time.</p>
+      <div class="why-features">
+        <div class="why-feature fade-up">
+          <div class="wf-num">01</div>
+          <div>
+            <div class="wf-title">Premium Materials Only</div>
+            <div class="wf-text">We source only high-grade papers, inks, and substrates to ensure your prints look stunning and last longer.</div>
+          </div>
+        </div>
+        <div class="why-feature fade-up">
+          <div class="wf-num">02</div>
+          <div>
+            <div class="wf-title">Fast & Reliable Turnaround</div>
+            <div class="wf-text">48-hour standard delivery on most orders. Urgent orders accommodated without compromising quality.</div>
+          </div>
+        </div>
+        <div class="why-feature fade-up">
+          <div class="wf-num">03</div>
+          <div>
+            <div class="wf-title">Dedicated Support</div>
+            <div class="wf-text">From file preparation to final delivery, our team guides you through every step of the print process.</div>
+          </div>
+        </div>
+        <div class="why-feature fade-up">
+          <div class="wf-num">04</div>
+          <div>
+            <div class="wf-title">Competitive Pricing</div>
+            <div class="wf-text">Transparent, fair pricing with no hidden costs. Volume discounts available for bulk and repeat orders.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="why-badge">AJ</div>
+      <div class="why-tag">Est. Since 2014</div>
+      <div class="why-tag">ISO Quality Print</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <p class="section-label">How It Works</p>
+  <h2 class="section-title">4 Simple Steps<br>to Perfect Prints</h2>
+  <div class="process-steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-title">Share Your Brief</div>
+      <div class="step-text">Tell us what you need — product type, quantity, size, and any design files or ideas you have in mind.</div>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">02</div>
+      <div class="step-title">Get a Quote</div>
+      <div class="step-text">We provide a clear, itemised quote within hours. No surprises — just honest, competitive pricing.</div>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">03</div>
+      <div class="step-title">Approve a Proof</div>
+      <div class="step-text">We send you a digital proof for review before printing starts. Changes are welcome until you're satisfied.</div>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">04</div>
+      <div class="step-title">Receive & Enjoy</div>
+      <div class="step-text">Your prints are carefully packaged and delivered to your doorstep — ready to impress.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header">
+    <p class="section-label">Product Range</p>
+    <h2 class="section-title">What We Print</h2>
+    <p class="section-sub">A wide range of print products to serve every business need.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card fade-up">
+      <div class="pc-icon">💼</div>
+      <div class="pc-name">Business Cards</div>
+      <div class="pc-desc">Standard, premium, and specialty finishes including matte, gloss, and soft-touch lamination.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">📄</div>
+      <div class="pc-name">Flyers & Leaflets</div>
+      <div class="pc-desc">A4, A5, DL formats in various paper weights — perfect for promotions and campaigns.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">📖</div>
+      <div class="pc-name">Brochures</div>
+      <div class="pc-desc">Folded and saddle-stitched brochures with full-color printing on premium coated stocks.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">🏷️</div>
+      <div class="pc-name">Stickers & Labels</div>
+      <div class="pc-desc">Die-cut stickers, roll labels, and custom shapes on paper or waterproof vinyl.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">🪧</div>
+      <div class="pc-name">Banners</div>
+      <div class="pc-desc">Pull-up, X-stand, and wall banners for events, exhibitions, and retail displays.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">🗓️</div>
+      <div class="pc-name">Calendars</div>
+      <div class="pc-desc">Desk and wall calendars customised with your brand, photos, and schedule.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">📋</div>
+      <div class="pc-name">Notepads</div>
+      <div class="pc-desc">Custom-branded notepads, diaries, and writing sets for corporate gifting.</div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="pc-icon">🛍️</div>
+      <div class="pc-name">Carry Bags</div>
+      <div class="pc-desc">Branded paper and non-woven bags for retail, events, and gift packaging.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <p class="section-label">Client Feedback</p>
+  <h2 class="section-title" style="color:var(--white)">What Our Clients Say</h2>
+  <div class="testimonials-grid">
+    <div class="tcard fade-up">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Ordered 5,000 business cards with a tight deadline. AJ Traders delivered in 24 hours with exceptional print quality. Will definitely order again."</div>
+      <div class="tcard-author">
+        <div class="tcard-avatar">AK</div>
+        <div>
+          <div class="tcard-name">Ahmed Khan</div>
+          <div class="tcard-role">CEO, Apex Consulting</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"The large-format banners for our exhibition looked stunning. Colors were vivid and exactly as designed. Professional service from start to finish."</div>
+      <div class="tcard-author">
+        <div class="tcard-avatar">SR</div>
+        <div>
+          <div class="tcard-name">Sara Rizvi</div>
+          <div class="tcard-role">Marketing Manager, TechPak</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Our vehicle branding project was handled with great professionalism. The team advised us on the best approach and the result was beyond our expectations."</div>
+      <div class="tcard-author">
+        <div class="tcard-avatar">OM</div>
+        <div>
+          <div class="tcard-name">Omar Mirza</div>
+          <div class="tcard-role">Director, Swift Logistics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-section">
+  <h2>Ready to<br>Start Printing?</h2>
+  <a href="#contact" class="btn-dark">Request a Free Quote →</a>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's Talk<br>Printing</h2>
+      <p class="section-sub">Have a project in mind? Send us the details and we'll get back to you with a quote within a few hours.</p>
+      <div class="contact-info">
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Location</div>
+            <div class="ci-value">Islamabad, Pakistan</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Phone / WhatsApp</div>
+            <div class="ci-value">+92 300 000 0000</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value">info@ajtraders.pk</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🕒</div>
+          <div>
+            <div class="ci-label">Working Hours</div>
+            <div class="ci-value">Mon – Sat: 9:00 AM – 7:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Ali" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Hassan" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="ali@company.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" placeholder="+92 300 000 0000" />
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option value="">Select a service…</option>
+          <option>Digital Printing</option>
+          <option>Large Format / Banners</option>
+          <option>Flex & Vinyl</option>
+          <option>Packaging Print</option>
+          <option>Corporate Stationery</option>
+          <option>Vehicle Branding</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message / Details</label>
+        <textarea placeholder="Describe your project — quantity, size, material, deadline…"></textarea>
+      </div>
+      <button class="form-submit">Send My Quote Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AJ <span>Traders</span></div>
+  <div class="footer-copy">© 2025 AJ Traders. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth active nav highlight
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 30 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none';
+  });
+</script>
+</body>
+</html>
