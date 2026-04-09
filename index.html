@@ -441,6 +441,25 @@
       fill: white;
       flex-shrink: 0;
     }
+    /* ── SERVICE CARD IMAGE ── */
+    .sc-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+    .sc-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover .sc-img img {
+      transform: scale(1.05);
+    }
+    .sc-body {
+      padding: 1.8rem 2rem 2.5rem;
+    }
   </style>
 </head>
 <body>
@@ -523,42 +542,78 @@
   </div>
   <div class="services-grid">
     <div class="service-card fade-up">
-      <div class="sc-icon">🖨️</div>
-      <div class="sc-title">Digital Printing</div>
-      <div class="sc-desc">High-resolution digital prints for short runs, personalised materials, and quick-turnaround projects with vibrant color accuracy.</div>
-      <div class="sc-arrow">→</div>
+      <div class="sc-img">
+        <img src="images/services/digital-printing.png" alt="Digital Printing" />
+      </div>
+      <div class="sc-body">
+        <div class="sc-title">Digital Printing</div>
+        <div class="sc-desc">High-resolution digital prints for short runs, personalised materials, and quick-turnaround projects with vibrant color accuracy.</div>
+        <div class="sc-arrow">→</div>
+      </div>
     </div>
+  
     <div class="service-card fade-up">
-      <div class="sc-icon">📐</div>
-      <div class="sc-title">Large Format</div>
-      <div class="sc-desc">Eye-catching banners, posters, building wraps, and outdoor signage printed at any scale with weather-resistant inks.</div>
-      <div class="sc-arrow">→</div>
+      <div class="sc-img">
+        <img src="images/services/large-format.png" alt="Large Format" />
+      </div>
+      <div class="sc-body">
+        <div class="sc-title">Large Format</div>
+        <div class="sc-desc">Eye-catching banners, posters, building wraps, and outdoor signage printed at any scale with weather-resistant inks.</div>
+        <div class="sc-arrow">→</div>
+      </div>
     </div>
+  
     <div class="service-card fade-up">
-      <div class="sc-icon">🖼️</div>
-      <div class="sc-title">Flex & Vinyl</div>
-      <div class="sc-desc">Durable flex banners, vinyl stickers, and cut-vinyl lettering for storefronts, events, and long-term outdoor applications.</div>
-      <div class="sc-arrow">→</div>
+      <div class="sc-img">
+        <img src="images/services/flex-vinyl.png" alt="Flex & Vinyl" />
+      </div>
+      <div class="sc-body">
+        <div class="sc-title">Flex & Vinyl</div>
+        <div class="sc-desc">Durable flex banners, vinyl stickers, and cut-vinyl lettering for storefronts, events, and long-term outdoor applications.</div>
+        <div class="sc-arrow">→</div>
+      </div>
     </div>
+  
     <div class="service-card fade-up">
-      <div class="sc-icon">📦</div>
-      <div class="sc-title">Packaging Print</div>
-      <div class="sc-desc">Custom boxes, bags, and product packaging that make your brand stand out on the shelf and in customers' hands.</div>
-      <div class="sc-arrow">→</div>
+      <div class="sc-img">
+        <img src="images/services/packaging.png" alt="Packaging Print" />
+      </div>
+      <div class="sc-body">
+        <div class="sc-title">Packaging Print</div>
+        <div class="sc-desc">Custom boxes, bags, and product packaging that make your brand stand out on the shelf and in customers' hands.</div>
+        <div class="sc-arrow">→</div>
+      </div>
     </div>
+  
     <div class="service-card fade-up">
-      <div class="sc-icon">🪪</div>
-      <div class="sc-title">Corporate Stationery</div>
-      <div class="sc-desc">Business cards, letterheads, envelopes, and notepads that present your company with a consistent, professional identity.</div>
-      <div class="sc-arrow">→</div>
+      <div class="sc-img">
+        <img src="images/services/stationery.png" alt="Corporate Stationery" />
+      </div>
+      <div class="sc-body">
+        <div class="sc-title">Corporate Stationery</div>
+        <div class="sc-desc">Business cards, letterheads, envelopes, and notepads that present your company with a consistent, professional identity.</div>
+        <div class="sc-arrow">→</div>
+      </div>
     </div>
+  
     <div class="service-card fade-up">
-      <div class="sc-icon">🚗</div>
-      <div class="sc-title">Vehicle Branding</div>
-      <div class="sc-desc">Full and partial vehicle wraps that turn your fleet into moving billboards — professionally installed, strikingly designed.</div>
-      <div class="sc-arrow">→</div>
+      <div class="sc-img">
+        <img src="images/services/vehicle-branding.png" alt="Vehicle Branding" />
+      </div>
+      <div class="sc-body">
+        <div class="sc-title">Vehicle Branding</div>
+        <div class="sc-desc">Full and partial vehicle wraps that turn your fleet into moving billboards — professionally installed, strikingly designed.</div>
+        <div class="sc-arrow">→</div>
+      </div>
     </div>
+  
   </div>
+  
+  <!-- VIEW ALL SERVICES BUTTON -->
+  <div style="text-align:center; margin-top: 3rem;">
+    <a href="services.html" class="btn-primary">View All Services →</a>
+  </div>
+</div>
 </section>
 
 <!-- WHY US -->
