@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services – AJ Traders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0d0d0d; --paper: #f5f0e8; --gold: #c8953a;
+      --gold-light: #e8b865; --white: #ffffff;
+      --gray: #6b6b6b; --light-gray: #ebebeb;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(13,13,13,0.96); backdrop-filter: blur(12px);
+      padding: 0 6vw; display: flex; align-items: center;
+      justify-content: space-between; height: 70px;
+      border-bottom: 1px solid rgba(200,149,58,0.25);
+    }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); letter-spacing: 3px; text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { background: var(--gold); color: var(--ink) !important; padding: 0.5rem 1.2rem; border-radius: 3px; font-weight: 600 !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); }
+    .mobile-menu { display: none; position: fixed; top: 70px; left: 0; width: 100%; background: rgba(13,13,13,0.98); padding: 2rem 6vw; flex-direction: column; gap: 1.4rem; z-index: 99; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1.1rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* PAGE HERO */
+    .page-hero {
+      background: var(--ink); padding: 140px 6vw 80px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(200,149,58,0.1) 0%, transparent 65%);
+    }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(200,149,58,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,149,58,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-content { position: relative; }
+    .breadcrumb { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; letter-spacing: 1px; }
+    .breadcrumb a { color: var(--gold); text-decoration: none; }
+    .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); color: var(--white); line-height: 0.95; letter-spacing: 2px; }
+    .page-hero h1 em { color: var(--gold); font-style: normal; }
+    .page-hero p { color: rgba(255,255,255,0.55); font-size: 1.05rem; line-height: 1.75; max-width: 540px; margin-top: 1.5rem; font-weight: 300; }
+
+    /* SERVICES SECTION */
+    .all-services { padding: 80px 6vw; background: var(--white); }
+    .category-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 2px;
+      color: var(--ink); margin: 3rem 0 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5px; background: var(--light-gray);
+      border: 1.5px solid var(--light-gray);
+      margin-bottom: 1.5px;
+    }
+    .service-card { background: var(--white); cursor: pointer; transition: background 0.25s; position: relative; overflow: hidden; }
+    .service-card:hover { background: var(--ink); }
+    .service-card:hover .sc-img img { transform: scale(1.05); }
+    .service-card:hover .sc-title { color: var(--white); }
+    .service-card:hover .sc-desc { color: rgba(255,255,255,0.5); }
+    .service-card:hover .sc-arrow { color: var(--gold); }
+    .sc-img { width: 100%; height: 200px; overflow: hidden; }
+    .sc-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .sc-body { padding: 1.8rem 2rem 2.5rem; }
+    .sc-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .sc-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 0.6rem; transition: color 0.25s; }
+    .sc-desc { font-size: 0.87rem; color: var(--gray); line-height: 1.65; transition: color 0.25s; font-weight: 300; }
+    .sc-arrow { position: absolute; bottom: 1.5rem; right: 1.8rem; font-size: 1.2rem; color: var(--light-gray); transition: color 0.25s; }
+
+    /* CTA */
+    .cta-section { background: var(--gold); padding: 80px 6vw; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--ink); line-height: 1; }
+    .btn-dark { background: var(--ink); color: var(--white); padding: 1rem 2.5rem; border-radius: 3px; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s, transform 0.2s; white-space: nowrap; }
+    .btn-dark:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #080808; color: rgba(255,255,255,0.4); padding: 3rem 6vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); letter-spacing: 3px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy { font-size: 0.82rem; }
+    .footer-links { display: flex; gap: 1.8rem; }
+    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* WHATSAPP */
+    .wa-btn { position: fixed; bottom: 30px; right: 30px; z-index: 999; background: #25D366; color: white; border-radius: 50px; padding: 0.75rem 1.4rem; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+    .wa-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+    .wa-btn svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">AJ <span>Traders</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="index.html#products">Products</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="index.html#products" onclick="toggleMenu()">Products</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Get a Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> / All Services</div>
+    <h1>All Our<br><em>Services</em></h1>
+    <p>From digital prints to large-scale signage — explore the full range of professional printing services AJ Traders has to offer.</p>
+  </div>
+</div>
+
+<!-- ALL SERVICES -->
+<section class="all-services">
+
+  <div class="category-label">Digital & Offset Printing</div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/digital-printing.png" alt="Digital Printing" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Digital Printing</div>
+        <div class="sc-desc">High-resolution digital prints for short runs, personalised materials, and quick-turnaround projects with vibrant color accuracy.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/brochures.png" alt="Brochures & Catalogues" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Brochures & Catalogues</div>
+        <div class="sc-desc">Folded and saddle-stitched brochures, product catalogues, and booklets printed on premium coated stocks.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/stationery.png" alt="Corporate Stationery" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Corporate Stationery</div>
+        <div class="sc-desc">Business cards, letterheads, envelopes, and notepads with a consistent, professional brand identity.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-label">Large Format & Signage</div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/large-format.png" alt="Large Format" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Large Format</div>
+        <div class="sc-desc">Eye-catching banners, posters, building wraps, and outdoor signage printed at any scale with weather-resistant inks.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/flex-vinyl.png" alt="Flex & Vinyl" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Flex & Vinyl</div>
+        <div class="sc-desc">Durable flex banners, vinyl stickers, and cut-vinyl lettering for storefronts, events, and outdoor use.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/signage.png" alt="Signage & Boards" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Signage & Boards</div>
+        <div class="sc-desc">Indoor and outdoor signage boards, 3D lettering, LED-lit signs, and directional signage for businesses.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-label">Speciality Printing</div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/packaging.png" alt="Packaging Print" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Packaging Print</div>
+        <div class="sc-desc">Custom boxes, bags, and product packaging that make your brand stand out on the shelf.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/vehicle-branding.png" alt="Vehicle Branding" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Vehicle Branding</div>
+        <div class="sc-desc">Full and partial vehicle wraps that turn your fleet into moving billboards — professionally installed.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-img"><img src="images/services/exhibition.png" alt="Exhibition Displays" /></div>
+      <div class="sc-body">
+        <div class="sc-title">Exhibition Displays</div>
+        <div class="sc-desc">Pull-up banners, display stands, backdrop systems, and full booth setups for trade shows and events.</div>
+        <div class="sc-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Need a Custom<br>Print Solution?</h2>
+  <a href="index.html#contact" class="btn-dark">Request a Free Quote →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AJ <span>Traders</span></div>
+  <div class="footer-copy">© 2025 AJ Traders. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a class="wa-btn" href="https://wa.me/923335199692" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.833L.057 23.25c-.073.266.171.51.437.437l5.417-1.453A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.371l-.36-.214-3.713.997.993-3.63-.234-.374A9.818 9.818 0 1112 21.818z"/>
+  </svg>
+  Chat on WhatsApp
+</a>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
