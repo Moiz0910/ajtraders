@@ -219,16 +219,18 @@
     .service-card:hover .sc-title { color: var(--white); }
     .service-card:hover .sc-desc { color: rgba(255,255,255,0.5); }
     .service-card:hover .sc-arrow { color: var(--gold); }
+    .service-card:hover .sc-desc { opacity: 1; max-height: 200px; }
+    .service-card:hover .sc-arrow { opacity: 1; color: var(--gold); }
     .sc-icon { font-size: 2.2rem; margin-bottom: 1.5rem; transition: color 0.25s; }
     .sc-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem; letter-spacing: 1px;
       margin-bottom: 0.8rem; transition: color 0.25s;
     }
-    .sc-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; transition: color 0.25s; font-weight: 300; }
-    .sc-arrow {
+    .sc-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; font-weight: 300; opacity: 0; max-height: 0; overflow: hidden; transition: opacity 0.3s ease, max-height 0.3s ease, color 0.25s; }
+    .sc-arrow { 
       position: absolute; bottom: 1.5rem; right: 1.8rem;
-      font-size: 1.2rem; color: var(--light-gray); transition: color 0.25s;
+      font-size: 1.2rem; color: var(--light-gray); opacity: 0; transition: opacity 0.3s ease, color 0.25s; 
     }
 
     /* ── WHY US ── */
@@ -468,7 +470,7 @@
 <nav>
   <a href="#" class="logo">AJ <span>Traders</span></a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
+    <li><a href="services.html">Services</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#process">How It Works</a></li>
     <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
@@ -543,66 +545,66 @@
   <div class="services-grid">
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/digital-printing.png" alt="Digital Printing" />
+        <img src="images/services/business-cards.png" alt="Digital Printing" />
       </div>
       <div class="sc-body">
-        <div class="sc-title">Digital Printing</div>
-        <div class="sc-desc">High-resolution digital prints for short runs, personalised materials, and quick-turnaround projects with vibrant color accuracy.</div>
+        <div class="sc-title">Business Cards</div>
+        <div class="sc-desc">First Impressions That Stays</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/large-format.png" alt="Large Format" />
+        <img src="images/services/banners-signage.png" alt="Large Format" />
       </div>
       <div class="sc-body">
-        <div class="sc-title">Large Format</div>
-        <div class="sc-desc">Eye-catching banners, posters, building wraps, and outdoor signage printed at any scale with weather-resistant inks.</div>
+        <div class="sc-title">Banners & Signage</div>
+        <div class="sc-desc">Be Seen. From Across The Room — Or Across The Street.</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/flex-vinyl.png" alt="Flex & Vinyl" />
+        <img src="images/services/brochures-flyers.png" alt="Flex & Vinyl" />
       </div>
       <div class="sc-body">
-        <div class="sc-title">Flex & Vinyl</div>
-        <div class="sc-desc">Durable flex banners, vinyl stickers, and cut-vinyl lettering for storefronts, events, and long-term outdoor applications.</div>
+        <div class="sc-title">Brochures & Flyers</div>
+        <div class="sc-desc">Your Story. Printed Beautifully.</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/packaging.png" alt="Packaging Print" />
+        <img src="images/services/flex-printing.png" alt="Packaging Print" />
       </div>
       <div class="sc-body">
-        <div class="sc-title">Packaging Print</div>
-        <div class="sc-desc">Custom boxes, bags, and product packaging that make your brand stand out on the shelf and in customers' hands.</div>
+        <div class="sc-title">Flex Printing</div>
+        <div class="sc-desc">Durable. Vivid. Built For Pakistan's Weather.</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/stationery.png" alt="Corporate Stationery" />
+        <img src="images/services/stickers-labels.png" alt="Corporate Stationery" />
       </div>
       <div class="sc-body">
-        <div class="sc-title">Corporate Stationery</div>
-        <div class="sc-desc">Business cards, letterheads, envelopes, and notepads that present your company with a consistent, professional identity.</div>
+        <div class="sc-title">Stickers & Labels</div>
+        <div class="sc-desc">Stick Your Brand Everywhere It Matters</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/vehicle-branding.png" alt="Vehicle Branding" />
+        <img src="images/services/packaging.png" alt="Vehicle Branding" />
       </div>
       <div class="sc-body">
-        <div class="sc-title">Vehicle Branding</div>
-        <div class="sc-desc">Full and partial vehicle wraps that turn your fleet into moving billboards — professionally installed, strikingly designed.</div>
+        <div class="sc-title">Packaging</div>
+        <div class="sc-desc">Packaging That Makes People Pick It Up.</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
