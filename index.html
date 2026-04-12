@@ -279,21 +279,7 @@
     .step-title { font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem; }
     .step-text { font-size: 0.85rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
 
-    /* ── PRODUCTS ── */
-    .products { background: var(--white); }
-    .products-header { margin-bottom: 3rem; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
-    .product-card {
-      background: var(--paper);
-      padding: 2rem 1.5rem;
-      border-bottom: 3px solid transparent;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .product-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-    .pc-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-    .pc-name { font-weight: 700; margin-bottom: 0.4rem; }
-    .pc-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
-
+  
     /* ── TESTIMONIALS ── */
     .testimonials { background: var(--ink); color: var(--white); }
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
@@ -471,7 +457,6 @@
   <a href="#" class="logo">AJ <span>Traders</span></a>
   <ul class="nav-links">
     <li><a href="services.html">Services</a></li>
-    <li><a href="#products">Products</a></li>
     <li><a href="#process">How It Works</a></li>
     <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
   </ul>
@@ -482,7 +467,6 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#products" onclick="toggleMenu()">Products</a>
   <a href="#process" onclick="toggleMenu()">How It Works</a>
   <a href="#contact" onclick="toggleMenu()">Get a Quote</a>
 </div>
@@ -545,18 +529,18 @@
   <div class="services-grid">
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/business-cards.png" alt="Digital Printing" />
+        <img src="images/services/business-cards.png" alt="Business Cards" />
       </div>
       <div class="sc-body">
         <div class="sc-title">Business Cards</div>
-        <div class="sc-desc">First Impressions That Stays</div>
+        <div class="sc-desc">First Impressions That Stay.</div>
         <div class="sc-arrow">→</div>
       </div>
     </div>
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/banners-signage.png" alt="Large Format" />
+        <img src="images/services/banners-signage.png" alt="Banners & Signage" />
       </div>
       <div class="sc-body">
         <div class="sc-title">Banners & Signage</div>
@@ -567,7 +551,7 @@
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/brochures-flyers.png" alt="Flex & Vinyl" />
+        <img src="images/services/brochures-flyers.png" alt="Brochures & Flyers" />
       </div>
       <div class="sc-body">
         <div class="sc-title">Brochures & Flyers</div>
@@ -578,7 +562,7 @@
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/flex-printing.png" alt="Packaging Print" />
+        <img src="images/services/flex-printing.png" alt="Flex Printing" />
       </div>
       <div class="sc-body">
         <div class="sc-title">Flex Printing</div>
@@ -589,7 +573,7 @@
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/stickers-labels.png" alt="Corporate Stationery" />
+        <img src="images/services/stickers-labels.png" alt="Stickers & Labels" />
       </div>
       <div class="sc-body">
         <div class="sc-title">Stickers & Labels</div>
@@ -600,7 +584,7 @@
   
     <div class="service-card fade-up">
       <div class="sc-img">
-        <img src="images/services/packaging.png" alt="Vehicle Branding" />
+        <img src="images/services/packaging.png" alt="Packaging" />
       </div>
       <div class="sc-body">
         <div class="sc-title">Packaging</div>
@@ -694,57 +678,6 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section class="products" id="products">
-  <div class="products-header">
-    <p class="section-label">Product Range</p>
-    <h2 class="section-title">What We Print</h2>
-    <p class="section-sub">A wide range of print products to serve every business need.</p>
-  </div>
-  <div class="products-grid">
-    <div class="product-card fade-up">
-      <div class="pc-icon">💼</div>
-      <div class="pc-name">Business Cards</div>
-      <div class="pc-desc">Standard, premium, and specialty finishes including matte, gloss, and soft-touch lamination.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">📄</div>
-      <div class="pc-name">Flyers & Leaflets</div>
-      <div class="pc-desc">A4, A5, DL formats in various paper weights — perfect for promotions and campaigns.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">📖</div>
-      <div class="pc-name">Brochures</div>
-      <div class="pc-desc">Folded and saddle-stitched brochures with full-color printing on premium coated stocks.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">🏷️</div>
-      <div class="pc-name">Stickers & Labels</div>
-      <div class="pc-desc">Die-cut stickers, roll labels, and custom shapes on paper or waterproof vinyl.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">🪧</div>
-      <div class="pc-name">Banners</div>
-      <div class="pc-desc">Pull-up, X-stand, and wall banners for events, exhibitions, and retail displays.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">🗓️</div>
-      <div class="pc-name">Calendars</div>
-      <div class="pc-desc">Desk and wall calendars customised with your brand, photos, and schedule.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">📋</div>
-      <div class="pc-name">Notepads</div>
-      <div class="pc-desc">Custom-branded notepads, diaries, and writing sets for corporate gifting.</div>
-    </div>
-    <div class="product-card fade-up">
-      <div class="pc-icon">🛍️</div>
-      <div class="pc-name">Carry Bags</div>
-      <div class="pc-desc">Branded paper and non-woven bags for retail, events, and gift packaging.</div>
-    </div>
-  </div>
-</section>
-
 <!-- TESTIMONIALS -->
 <section class="testimonials">
   <p class="section-label">Client Feedback</p>
@@ -811,14 +744,14 @@
           <div class="ci-icon">📞</div>
           <div>
             <div class="ci-label">Phone / WhatsApp</div>
-            <div class="ci-value">+92 300 000 0000</div>
+            <div class="ci-value">+92 333 519 9692</div>
           </div>
         </div>
         <div class="ci-item">
           <div class="ci-icon">✉️</div>
           <div>
             <div class="ci-label">Email</div>
-            <div class="ci-value">info@ajtraders.pk</div>
+            <div class="ci-value">ajtraders.isb@gmail.com</div>
           </div>
         </div>
         <div class="ci-item">
@@ -834,16 +767,16 @@
       <div class="form-row">
         <div class="form-group">
           <label>First Name</label>
-          <input type="text" placeholder="Ali" />
+          <input type="text"/>
         </div>
         <div class="form-group">
           <label>Last Name</label>
-          <input type="text" placeholder="Hassan" />
+          <input type="text"/>
         </div>
       </div>
       <div class="form-group">
         <label>Email Address</label>
-        <input type="email" placeholder="ali@company.com" />
+        <input type="email"/>
       </div>
       <div class="form-group">
         <label>Phone / WhatsApp</label>
@@ -875,11 +808,6 @@
 <footer>
   <div class="footer-logo">AJ <span>Traders</span></div>
   <div class="footer-copy">© 2025 AJ Traders. All rights reserved.</div>
-  <div class="footer-links">
-    <a href="#services">Services</a>
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-  </div>
 </footer>
 
 <script>
