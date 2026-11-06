@@ -161,29 +161,44 @@
       font-size: 0.75rem; color: rgba(255,255,255,0.45);
       text-transform: uppercase; letter-spacing: 2px;
         }
+        /* ── 3D CAROUSEL ── */
+    .showcase { background: var(--ink); padding: var(--section-pad) 0; text-align: center; overflow: hidden; }
+    .showcase .section-sub { margin: 0 auto; color: rgba(255,255,255,0.5); }
     .scene {
+      --r: 650px;                 /* cylinder radius */
       perspective: 900px;
-      height: 420px;
+      height: 460px;
+      margin-top: 2.5rem;
       overflow: hidden;
+      cursor: grab;
+      touch-action: pan-y;        /* vertical page scroll still works on phones */
+      user-select: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
-    .ring {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-    }
+    .scene.dragging { cursor: grabbing; }
+    .ring { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
     .card {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 110px; height: 170px;
-      margin: -85px 0 0 -55px;
-      border-radius: 14px;
-      display: grid; place-items: center;
+      position: absolute; top: 50%; left: 50%;
+      width: 150px; height: 220px; margin: -110px 0 0 -75px;
+      border-radius: 14px; overflow: hidden;
+      background: #222;
+      border: 1px solid rgba(200,149,58,0.35);
       backface-visibility: hidden;
-      /* the magic line: */
-      transform: rotateY(calc((var(--i) - 5.5) * 14deg)) translateZ(-650px);
+      transform: rotateY(calc(var(--i) * 15deg)) translateZ(calc(var(--r) * -1));
     }
-
+    .card img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .card span {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.4rem 0.6rem 0.7rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px;
+      color: #fff; font-size: 1.05rem;
+    }
+    @media (max-width: 700px) {
+      .scene { --r: 380px; perspective: 600px; height: 360px; }
+      .card { width: 110px; height: 170px; margin: -85px 0 0 -55px; }
+    }
     /* ── MARQUEE ── */
     .marquee-strip {
       background: var(--gold);
@@ -513,23 +528,13 @@
     </div>
   </div>
 </section>
-<div class="scene">
-  <div class="ring" id="ring">
-    <div class="card" style="--i:0">Card</div>
-    <div class="card" style="--i:1">Card</div>
-    <div class="card" style="--i:2">Card</div>
-    <div class="card" style="--i:3">Card</div>
-    <div class="card" style="--i:4">Card</div>
-    <div class="card" style="--i:5">Card</div>
-    <div class="card" style="--i:6">Card</div>
-    <div class="card" style="--i:7">Card</div>
-    <div class="card" style="--i:8">Card</div>
-    <div class="card" style="--i:9">Card</div>
-    <div class="card" style="--i:10">Card</div>
-    <div class="card" style="--i:11">Card</div>
-  </div>
-</div>
-<!-- MARQUEE -->
+<!-- SHOWCASE CAROUSEL -->
+<section class="showcase">
+  <p class="section-label">Our Range</p>
+  <h2 class="section-title" style="color:var(--white)">Print That Stands Out</h2>
+  <p class="section-sub">Drag or swipe to explore.</p>
+  <div class="scene" id="scene"><div class="ring" id="ring"></div></div>
+</section><!-- MARQUEE -->
 <div class="marquee-strip">
   <div class="marquee-track" id="marquee">
     <div class="marquee-item">Business Cards</div>
@@ -866,6 +871,53 @@
     const nav = document.querySelector('nav');
     nav.style.boxShadow = window.scrollY > 30 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none';
   });
+
+    // 3D carousel
+  (function () {
+    const items = [
+      ['Business Cards',    'images/services/business-cards.png'],
+      ['Banners & Signage', 'images/services/banners-signage.png'],
+      ['Brochures & Flyers','images/services/brochures-flyers.png'],
+      ['Flex Printing',     'images/services/flex-printing.png'],
+      ['Stickers & Labels', 'images/services/stickers-labels.png'],
+      ['Packaging',         'images/services/packaging.png']
+    ];
+    const ring = document.getElementById('ring');
+    const scene = document.getElementById('scene');
+    const COUNT = 24;                       // 360° / 15° per card
+  
+    for (let i = 0; i < COUNT; i++) {
+      const [name, src] = items[i % items.length];
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.setProperty('--i', i);
+      card.innerHTML = `<img src="${src}" alt="${name}" loading="lazy"><span>${name}</span>`;
+      ring.appendChild(card);
+    }
+  
+    const AUTO = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.08;
+    let angle = 0, velocity = 0, dragging = false, lastX = 0;
+  
+    scene.addEventListener('pointerdown', e => {
+      dragging = true; lastX = e.clientX;
+      scene.setPointerCapture(e.pointerId);
+      scene.classList.add('dragging');
+    });
+    scene.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX; lastX = e.clientX;
+      angle -= dx * 0.15; velocity = -dx * 0.15;
+    });
+    const end = () => { dragging = false; scene.classList.remove('dragging'); };
+    scene.addEventListener('pointerup', end);
+    scene.addEventListener('pointercancel', end);
+  
+    (function tick() {
+      if (!dragging) { angle += velocity + AUTO; velocity *= 0.95; }  // slow auto-spin + inertia after a flick
+      ring.style.transform = `rotateY(${angle}deg)`;
+      requestAnimationFrame(tick);
+    })();
+  })();
 </script>
   <!-- WHATSAPP BUTTON -->
 <a class="wa-btn"
