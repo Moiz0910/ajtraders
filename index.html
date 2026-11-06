@@ -160,6 +160,28 @@
     .hero-stat .label {
       font-size: 0.75rem; color: rgba(255,255,255,0.45);
       text-transform: uppercase; letter-spacing: 2px;
+        }
+    .scene {
+      perspective: 900px;
+      height: 420px;
+      overflow: hidden;
+    }
+    .ring {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+    .card {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 110px; height: 170px;
+      margin: -85px 0 0 -55px;
+      border-radius: 14px;
+      display: grid; place-items: center;
+      backface-visibility: hidden;
+      /* the magic line: */
+      transform: rotateY(calc((var(--i) - 5.5) * 14deg)) translateZ(-650px);
     }
 
     /* ── MARQUEE ── */
@@ -491,7 +513,22 @@
     </div>
   </div>
 </section>
-
+<div class="scene">
+  <div class="ring" id="ring">
+    <div class="card" style="--i:0">Card</div>
+    <div class="card" style="--i:1">Card</div>
+    <div class="card" style="--i:2">Card</div>
+    <div class="card" style="--i:3">Card</div>
+    <div class="card" style="--i:4">Card</div>
+    <div class="card" style="--i:5">Card</div>
+    <div class="card" style="--i:6">Card</div>
+    <div class="card" style="--i:7">Card</div>
+    <div class="card" style="--i:8">Card</div>
+    <div class="card" style="--i:9">Card</div>
+    <div class="card" style="--i:10">Card</div>
+    <div class="card" style="--i:11">Card</div>
+  </div>
+</div>
 <!-- MARQUEE -->
 <div class="marquee-strip">
   <div class="marquee-track" id="marquee">
