@@ -872,26 +872,27 @@
     nav.style.boxShadow = window.scrollY > 30 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none';
   });
 
-    // 3D carousel
+  // 3D carousel
   (function () {
     const items = [
-      ['Business Cards',    'images/services/business-cards.png'],
-      ['Banners & Signage', 'images/services/banners-signage.png'],
-      ['Brochures & Flyers','images/services/brochures-flyers.png'],
-      ['Flex Printing',     'images/services/flex-printing.png'],
-      ['Stickers & Labels', 'images/services/stickers-labels.png'],
-      ['Packaging',         'images/services/packaging.png']
+      ['Business Cards',    '💼', '#2b2417'],
+      ['Banners & Signage', '🪧', '#1f2a2e'],
+      ['Brochures & Flyers','📰', '#2a1f2e'],
+      ['Flex Printing',     '🖨️', '#1f2e24'],
+      ['Stickers & Labels', '🏷️', '#2e2a1f'],
+      ['Packaging',         '📦', '#2e1f1f']
     ];
     const ring = document.getElementById('ring');
     const scene = document.getElementById('scene');
     const COUNT = 24;                       // 360° / 15° per card
   
     for (let i = 0; i < COUNT; i++) {
-      const [name, src] = items[i % items.length];
+      const [name, emoji, bg] = items[i % items.length];
       const card = document.createElement('div');
       card.className = 'card';
       card.style.setProperty('--i', i);
-      card.innerHTML = `<img src="${src}" alt="${name}" loading="lazy"><span>${name}</span>`;
+      card.style.background = `linear-gradient(160deg, ${bg}, #0d0d0d)`;
+      card.innerHTML = `<div class="emoji">${emoji}</div><span>${name}</span>`;
       ring.appendChild(card);
     }
   
@@ -913,7 +914,7 @@
     scene.addEventListener('pointercancel', end);
   
     (function tick() {
-      if (!dragging) { angle += velocity + AUTO; velocity *= 0.95; }  // slow auto-spin + inertia after a flick
+      if (!dragging) { angle += velocity + AUTO; velocity *= 0.95; }
       ring.style.transform = `rotateY(${angle}deg)`;
       requestAnimationFrame(tick);
     })();
